@@ -1,0 +1,5 @@
+<resources>
+    <string name="app_name">FloMusicSample</string>
+    <string name="toggle_on">On</string>
+    <string name="toggle_off">Off</string>
+</resources>
