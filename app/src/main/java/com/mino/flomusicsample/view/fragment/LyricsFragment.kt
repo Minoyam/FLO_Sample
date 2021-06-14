@@ -14,9 +14,11 @@ import dagger.hilt.android.AndroidEntryPoint
 class LyricsFragment : BaseFragment<FragmentLyricsBinding>(R.layout.fragment_lyrics) {
 
     private val lyricsAdapter: LyricsAdapter by lazy {
-        LyricsAdapter {
-            adapterClickAction(it)
-        }.apply {
+        LyricsAdapter({ clickPosition ->
+            adapterClickAction(clickPosition)
+        }, { currentPosition ->
+            setScroll(currentPosition)
+        }).apply {
             setHasStableIds(true)
         }
     }
@@ -48,6 +50,10 @@ class LyricsFragment : BaseFragment<FragmentLyricsBinding>(R.layout.fragment_lyr
                 }
             })
         }
+    }
+
+    private fun setScroll(index: Int) {
+        binding.rvContent.scrollToPosition(index)
     }
 
     private fun adapterClickAction(index: Int) {

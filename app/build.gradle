@@ -66,6 +66,9 @@ dependencies {
     // https://github.com/bumptech/glide
     implementation "com.github.bumptech.glide:glide:$glide_version"
 
+    // https://github.com/google/ExoPlayer
+    implementation "com.google.android.exoplayer:exoplayer:$exoplayer_version"
+
     implementation project(path: ':domain')
     implementation project(path: ':data')
 }

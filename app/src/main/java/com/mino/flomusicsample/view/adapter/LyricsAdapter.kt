@@ -1,5 +1,6 @@
 package com.mino.flomusicsample.view.adapter
 
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.databinding.DataBindingUtil
@@ -10,7 +11,7 @@ import com.mino.flomusicsample.R
 import com.mino.flomusicsample.databinding.ItemLyricsBinding
 import com.mino.flomusicsample.vo.LyricsVo
 
-class LyricsAdapter(private val onClickAction: (Int) -> Unit) : RecyclerView.Adapter<LyricsAdapter.LyricsViewHolder>() {
+class LyricsAdapter(private val onClickAction: (Int) -> Unit, private val onScrollMove : (Int) -> Unit) : RecyclerView.Adapter<LyricsAdapter.LyricsViewHolder>() {
 
     private val lyricsList = mutableListOf<LyricsVo>()
     private var current = 0
@@ -26,6 +27,7 @@ class LyricsAdapter(private val onClickAction: (Int) -> Unit) : RecyclerView.Ada
         item[index].isCurrent = true
         current = index
         calDiff(item)
+        Log.e("SAdasdas",item.toString())
     }
 
     private fun calDiff(updateList: List<LyricsVo>) {
@@ -53,6 +55,9 @@ class LyricsAdapter(private val onClickAction: (Int) -> Unit) : RecyclerView.Ada
 
     override fun onBindViewHolder(holder: LyricsViewHolder, position: Int) {
         holder.bind(lyricsList[position])
+        if(lyricsList[position].isCurrent){
+            onScrollMove(position)
+        }
     }
 
     inner class LyricsViewHolder(private val binding: ItemLyricsBinding) :
